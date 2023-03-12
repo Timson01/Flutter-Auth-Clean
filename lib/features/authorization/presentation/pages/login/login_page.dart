@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../domain/bloc/auth_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,6 +27,12 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       isHiddenPassword = !isHiddenPassword;
     });
+  }
+
+  void login({required String username, required String password}) {
+    context
+        .read<AuthBloc>()
+        .add(AuthUserEvent(username: username, password: password));
   }
 
   @override
@@ -69,7 +78,9 @@ class _LoginPageState extends State<LoginPage> {
                   height: 50,
                   width: 200,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => login(
+                          username: usernameController.text,
+                          password: passwordController.text),
                       style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(

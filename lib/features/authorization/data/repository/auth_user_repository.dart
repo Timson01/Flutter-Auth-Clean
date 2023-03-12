@@ -1,7 +1,7 @@
 import 'package:flutter_auth_clean/features/authorization/data/api_util.dart';
 import 'package:flutter_auth_clean/features/authorization/domain/repository/auth_repository.dart';
 
-class AuthUserRepository extends AuthRepository {
+class AuthUserRepository implements AuthRepository {
   final ApiUtil _apiUtil;
 
   AuthUserRepository(this._apiUtil);
