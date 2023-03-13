@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 
-import '../../../features/authorization/presentation/pages/home/home_page.dart';
+import '../../../features/notes/presentation/pages/home/home_page.dart';
 import '../../../features/authorization/presentation/pages/login/login_page.dart';
 import '../../../features/authorization/presentation/service/check_auth_service.dart';
 

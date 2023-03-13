@@ -8,6 +8,27 @@ import '../../../../../locator.dart';
 
 class LoginService {
   Future<String> login(GetLoginData loginData) async {
+    locator<Dio>().interceptors.add(InterceptorsWrapper(
+        onError: (DioError error, ErrorInterceptorHandler handler) async {
+      if (error.response?.statusCode == 401) {
+        final refreshToken =
+            locator<FlutterSecureStorage>().read(key: REFRESH_TOKEN);
+        final response = await locator<Dio>().post(
+          '/token/refresh/',
+          data: {'refresh': refreshToken},
+        );
+        if (response.statusCode == 200) {
+          await locator<FlutterSecureStorage>()
+              .write(key: ACCESS_TOKEN, value: response.data['access']);
+          await locator<FlutterSecureStorage>()
+              .write(key: ACCESS_TOKEN, value: response.data['refresh']);
+        } else {
+          // Handle refresh token request failure
+        }
+      } else {
+        // Handle other errors
+      }
+    }));
     String message = '';
     try {
       final response =

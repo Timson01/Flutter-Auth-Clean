@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_clean/features/authorization/presentation/pages/login/login_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/bloc/auth_bloc.dart';
+import '../../../../authorization/domain/bloc/auth_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
