@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           body: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               if (state is Authenticated) {
-                AutoRouter.of(context).navigateNamed('/home-page');
+                AutoRouter.of(context).replaceNamed('/home-page');
               }
               return Padding(
                 padding: const EdgeInsets.all(30),

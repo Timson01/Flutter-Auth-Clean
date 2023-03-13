@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_clean/features/authorization/presentation/pages/login/login_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/bloc/auth_bloc.dart';
@@ -11,12 +12,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Home Page"),
+          title: const Text("Home Page"),
           centerTitle: true,
           leading: IconButton(
               onPressed: () {
                 context.read<AuthBloc>().add(LogoutEvent());
-                AutoRouter.of(context).navigateNamed('/login-page');
+                AutoRouter.of(context).replaceNamed('/');
               },
               icon: const Icon(Icons.logout_rounded)),
           backgroundColor: Colors.orangeAccent,
@@ -29,9 +30,9 @@ class HomePage extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Get Note:",
+          const Text("Get Note:",
               style: TextStyle(fontSize: 20, color: Colors.white)),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           SizedBox(
               height: 40,
               width: 150,
