@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.deepPurpleAccent,
         body: Padding(
           padding: const EdgeInsets.all(30),
           child: Column(
@@ -47,10 +48,16 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 controller: usernameController,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.blue,
+                    ),
                   ),
                   hintText: 'Введите имя',
+                  hintStyle: const TextStyle(color: Colors.black),
                 ),
               ),
               const SizedBox(height: 10),
@@ -58,10 +65,16 @@ class _LoginPageState extends State<LoginPage> {
                 controller: passwordController,
                 obscureText: isHiddenPassword,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.blue,
+                    ),
                   ),
                   hintText: 'Введите пароль',
+                  hintStyle: const TextStyle(color: Colors.black),
                   suffix: InkWell(
                     onTap: togglePasswordView,
                     child: Icon(
@@ -82,11 +95,14 @@ class _LoginPageState extends State<LoginPage> {
                           username: usernameController.text,
                           password: passwordController.text),
                       style: ButtonStyle(
+                          backgroundColor:
+                              const MaterialStatePropertyAll<Color>(
+                                  Colors.orangeAccent),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ))),
+                            borderRadius: BorderRadius.circular(18.0),
+                          ))),
                       child: const Text("Login")))
             ],
           ),
