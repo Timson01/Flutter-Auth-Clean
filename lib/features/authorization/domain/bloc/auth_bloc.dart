@@ -13,7 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> authUser(AuthUserEvent event, Emitter<AuthState> emit) async {
-    await authRepository.authUser(
+    await authRepository.login(
         username: event.username, password: event.password);
   }
 }

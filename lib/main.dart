@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_clean/core/presentation/routes/app_router.gr.dart';
-import 'package:flutter_auth_clean/features/authorization/data/repository/auth_user_repository.dart';
+import 'package:flutter_auth_clean/features/authorization/data/repository/auth_user_repository_impl.dart';
 import 'package:flutter_auth_clean/locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          AuthBloc(authRepository: locator<AuthUserRepository>()),
+          AuthBloc(authRepository: locator<AuthUserRepositoryImpl>()),
       child: MaterialApp.router(
         title: 'Flutter Auth',
         routerDelegate: appRouter.delegate(),
