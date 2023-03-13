@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_clean/features/authorization/presentation/pages/login/login_page.dart';
+import 'package:flutter_auth_clean/features/notes/domain/bloc/notes_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../authorization/domain/bloc/auth_bloc.dart';
@@ -37,7 +38,9 @@ class HomePage extends StatelessWidget {
               height: 40,
               width: 150,
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<NotesBloc>().add(GetNoteEvent());
+                  },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(

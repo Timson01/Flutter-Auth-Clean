@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_clean/core/presentation/routes/app_router.gr.dart';
 import 'package:flutter_auth_clean/features/authorization/data/repository/auth_user_repository_impl.dart';
+import 'package:flutter_auth_clean/features/notes/data/notes_api_util.dart';
+import 'package:flutter_auth_clean/features/notes/domain/bloc/notes_bloc.dart';
 import 'package:flutter_auth_clean/locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/authorization/domain/bloc/auth_bloc.dart';
+import 'features/notes/data/repository/notes_repository_impl.dart';
 
 Future<void> main() async {
   await initializeDependencies();
@@ -16,9 +19,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          AuthBloc(authRepository: locator<AuthUserRepositoryImpl>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) =>
+                AuthBloc(authRepository: locator<AuthUserRepositoryImpl>())),
+        BlocProvider(
+            create: (context) =>
+                NotesBloc(notesRepository: locator<NotesRepositoryImpl>())),
+      ],
       child: MaterialApp.router(
         title: 'Flutter Auth',
         debugShowCheckedModeBanner: false,

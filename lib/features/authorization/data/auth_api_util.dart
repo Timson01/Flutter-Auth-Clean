@@ -1,10 +1,10 @@
 import 'package:flutter_auth_clean/features/authorization/data/api/request/get_login_data.dart';
 import 'package:flutter_auth_clean/features/authorization/data/api/service/login_service.dart';
 
-class ApiUtil {
+class AuthApiUtil {
   final LoginService _loginService;
 
-  ApiUtil(this._loginService);
+  AuthApiUtil(this._loginService);
 
   Future<String> login({
     required String username,
