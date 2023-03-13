@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../domain/bloc/auth_bloc.dart';
+import 'package:flutter_auth_clean/features/authorization/presentation/utils/login_page_controller.dart';
+import 'components/password_text_field.dart';
+import 'components/user_name_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,7 +11,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isHiddenPassword = true;
   TextEditingController usernameController = TextEditingController(),
       passwordController = TextEditingController();
 
@@ -22,20 +20,6 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
 
     super.dispose();
-  }
-
-  void togglePasswordView() {
-    setState(() {
-      isHiddenPassword = !isHiddenPassword;
-    });
-  }
-
-  void login({required String username, required String password}) {
-    if (username == '' || password == "") return;
-    context
-        .read<AuthBloc>()
-        .add(AuthUserEvent(username: username, password: password));
-    AutoRouter.of(context).navigateNamed('/');
   }
 
   @override
@@ -48,55 +32,18 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextFormField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.blue,
-                    ),
-                  ),
-                  hintText: 'Введите имя',
-                  hintStyle: const TextStyle(color: Colors.black),
-                ),
-              ),
+              UserNameTextField(controller: usernameController),
               const SizedBox(height: 10),
-              TextFormField(
-                controller: passwordController,
-                obscureText: isHiddenPassword,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.blue,
-                    ),
-                  ),
-                  hintText: 'Введите пароль',
-                  hintStyle: const TextStyle(color: Colors.black),
-                  suffix: InkWell(
-                    onTap: togglePasswordView,
-                    child: Icon(
-                      isHiddenPassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
+              PasswordTextField(controller: passwordController),
               const SizedBox(height: 20),
               SizedBox(
                   height: 50,
                   width: 200,
                   child: ElevatedButton(
-                      onPressed: () => login(
+                      onPressed: () => LoginPageController.submitForm(
                           username: usernameController.text,
-                          password: passwordController.text),
+                          password: passwordController.text,
+                          context: context),
                       style: ButtonStyle(
                           backgroundColor:
                               const MaterialStatePropertyAll<Color>(
