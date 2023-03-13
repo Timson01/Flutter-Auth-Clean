@@ -11,6 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required this.authRepository}) : super(AuthInitial()) {
     on<AuthUserEvent>(authUser);
     on<CheckAuthStatusEvent>(checkAuthStatus);
+    on<LogoutEvent>(logout);
   }
 
   Future<void> authUser(AuthUserEvent event, Emitter<AuthState> emit) async {
@@ -26,5 +27,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else {
       emit(Unauthenticated());
     }
+  }
+
+  Future<void> logout(LogoutEvent event, Emitter<AuthState> emit) async {
+    await authRepository.logout();
   }
 }

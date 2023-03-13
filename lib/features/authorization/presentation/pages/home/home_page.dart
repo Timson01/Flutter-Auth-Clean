@@ -1,4 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../domain/bloc/auth_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,7 +14,11 @@ class HomePage extends StatelessWidget {
           title: Text("Home Page"),
           centerTitle: true,
           leading: IconButton(
-              onPressed: () {}, icon: const Icon(Icons.logout_rounded)),
+              onPressed: () {
+                context.read<AuthBloc>().add(LogoutEvent());
+                AutoRouter.of(context).navigateNamed('/login-page');
+              },
+              icon: const Icon(Icons.logout_rounded)),
           backgroundColor: Colors.orangeAccent,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
