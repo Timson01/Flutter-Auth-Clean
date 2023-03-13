@@ -13,7 +13,11 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<FlutterSecureStorage>(storage);
 
   final dio = Dio(
-    BaseOptions(baseUrl: SERVER_IP),
+    BaseOptions(
+      baseUrl: SERVER_IP,
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 7),
+    ),
   );
   locator.registerSingleton<Dio>(dio);
 

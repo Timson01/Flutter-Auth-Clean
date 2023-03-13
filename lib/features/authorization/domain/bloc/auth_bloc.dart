@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_auth_clean/features/authorization/presentation/utils/login_page_controller.dart';
 
 import '../repository/auth_repository.dart';
 
@@ -15,9 +18,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> authUser(AuthUserEvent event, Emitter<AuthState> emit) async {
-    await authRepository.login(
+    String message = await authRepository.login(
         username: event.username, password: event.password);
-    emit(Authenticated());
+    if (message == "OK") {
+      emit(Authenticated());
+    } else {
+      LoginPageController.showSnackBar(
+          message: message, context: event.context);
+    }
   }
 
   Future<void> checkAuthStatus(

@@ -7,9 +7,9 @@ class AuthUserRepositoryImpl implements AuthRepository {
   AuthUserRepositoryImpl(this._apiUtil);
 
   @override
-  Future<void> login(
+  Future<String> login(
       {required String username, required String password}) async {
-    await _apiUtil.login(username: username, password: password);
+    return await _apiUtil.login(username: username, password: password);
   }
 
   @override

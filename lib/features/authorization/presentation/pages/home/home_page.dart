@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                           RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                   ))),
-                  child: const Text("Login",
+                  child: const Text("Get Note",
                       style: TextStyle(fontSize: 15, color: Colors.white))))
         ],
       )),

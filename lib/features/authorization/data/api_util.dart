@@ -6,12 +6,12 @@ class ApiUtil {
 
   ApiUtil(this._loginService);
 
-  Future<void> login({
+  Future<String> login({
     required String username,
     required String password,
   }) async {
     final loginData = GetLoginData(username: username, password: password);
-    await _loginService.login(loginData);
+    return await _loginService.login(loginData);
   }
 
   Future<bool> isAuthenticated() async {
