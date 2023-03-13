@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,9 +31,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login({required String username, required String password}) {
+    if (username == '' || password == "") return;
     context
         .read<AuthBloc>()
         .add(AuthUserEvent(username: username, password: password));
+    AutoRouter.of(context).navigateNamed('/');
   }
 
   @override

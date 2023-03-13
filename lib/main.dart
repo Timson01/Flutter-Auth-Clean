@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
           AuthBloc(authRepository: locator<AuthUserRepositoryImpl>()),
       child: MaterialApp.router(
         title: 'Flutter Auth',
+        debugShowCheckedModeBanner: false,
         routerDelegate: appRouter.delegate(),
         routeInformationParser: appRouter.defaultRouteParser(),
       ),

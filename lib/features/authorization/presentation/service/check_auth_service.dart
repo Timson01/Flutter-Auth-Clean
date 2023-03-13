@@ -25,14 +25,12 @@ class _CheckAuthServiceState extends State<CheckAuthService> {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         if (state is Authenticated) {
-          AutoRouter.of(context).replace(const HomeRoute());
+          AutoRouter.of(context).navigate(const HomeRoute());
         } else {
-          AutoRouter.of(context).replace(const LoginRoute());
+          AutoRouter.of(context).navigate(const LoginRoute());
         }
         return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
+          body: Center(child: CircularProgressIndicator()),
         );
       },
     );
