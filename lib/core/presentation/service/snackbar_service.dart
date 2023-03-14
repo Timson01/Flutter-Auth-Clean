@@ -8,7 +8,7 @@ class SnackBarService {
       backgroundColor: Colors.red,
       content: Text(
         content,
-        style: TextStyle(fontSize: 15, color: Colors.white),
+        style: const TextStyle(fontSize: 15, color: Colors.white),
       ),
     ));
   }

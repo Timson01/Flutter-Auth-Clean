@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_auth_clean/core/data/service/http_service.dart';
-import 'package:flutter_auth_clean/core/utils/constants/strings.dart';
 import 'package:flutter_auth_clean/features/authorization/data/api/service/login_service.dart';
 import 'package:flutter_auth_clean/features/authorization/data/repository/auth_repository_impl.dart';
 import 'package:flutter_auth_clean/features/notes/data/api/service/notes_service.dart';
