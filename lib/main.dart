@@ -1,66 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_clean/core/presentation/routes/app_router.gr.dart';
+import 'package:flutter_auth_clean/core/presentation/service/snackbar_service.dart';
+import 'package:flutter_auth_clean/features/authorization/data/repository/auth_repository_impl.dart';
+import 'package:flutter_auth_clean/features/notes/domain/bloc/notes_bloc.dart';
+import 'package:flutter_auth_clean/locator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'features/authorization/domain/bloc/auth_bloc.dart';
+import 'features/notes/data/repository/notes_repository_impl.dart';
+
+Future<void> main() async {
+  await initializeDependencies();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) =>
+                AuthBloc(authRepository: locator<AuthUserRepositoryImpl>())),
+        BlocProvider(
+            create: (context) =>
+                NotesBloc(notesRepository: locator<NotesRepositoryImpl>())),
+      ],
+      child: MaterialApp.router(
+        scaffoldMessengerKey: SnackBarService.scaffoldKey,
+        title: 'Flutter Auth',
+        debugShowCheckedModeBanner: false,
+        routerDelegate: appRouter.delegate(),
+        routeInformationParser: appRouter.defaultRouteParser(),
       ),
     );
   }
