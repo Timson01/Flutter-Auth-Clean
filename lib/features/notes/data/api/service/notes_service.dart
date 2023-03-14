@@ -7,15 +7,8 @@ import '../../../domain/model/note.dart';
 
 class NotesService {
   Future<List<Note>> getNotes() async {
-    String? accessToken =
-        await locator<FlutterSecureStorage>().read(key: ACCESS_TOKEN);
-    try {
-      final response = await locator<Dio>().get('/api/notes/',
-          options: Options(headers: {"Authorization": "JWT $accessToken"}));
-      print(response.data);
-    } catch (e) {
-      print(e);
-    }
+    final response = await locator<Dio>().get('/api/notes/');
+    print(response.data);
     return [];
   }
 }

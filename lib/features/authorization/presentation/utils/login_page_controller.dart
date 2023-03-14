@@ -13,16 +13,4 @@ class LoginPageController {
     context.read<AuthBloc>().add(AuthUserEvent(
         username: username, password: password, context: context));
   }
-
-  static void showSnackBar(
-      {required String message, required BuildContext context}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      duration: const Duration(milliseconds: 1500),
-      backgroundColor: Colors.red,
-      content: Text(
-        message,
-        style: TextStyle(fontSize: 15, color: Colors.white),
-      ),
-    ));
-  }
 }

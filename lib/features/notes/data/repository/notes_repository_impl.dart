@@ -1,14 +1,14 @@
 import 'package:flutter_auth_clean/features/notes/domain/model/note.dart';
 import 'package:flutter_auth_clean/features/notes/domain/repository/notes_repository.dart';
 
-import '../notes_api_util.dart';
+import '../api/service/notes_service.dart';
 
 class NotesRepositoryImpl implements NotesRepository {
-  final NotesApiUtil _notesApiUtil;
+  final NotesService _notesService;
 
-  NotesRepositoryImpl(this._notesApiUtil);
+  NotesRepositoryImpl(this._notesService);
   @override
   Future<List<Note>> getNotes() async {
-    return _notesApiUtil.getNote();
+    return _notesService.getNotes();
   }
 }

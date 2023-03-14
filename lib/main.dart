@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_clean/core/presentation/routes/app_router.gr.dart';
-import 'package:flutter_auth_clean/features/authorization/data/repository/auth_user_repository_impl.dart';
-import 'package:flutter_auth_clean/features/notes/data/notes_api_util.dart';
+import 'package:flutter_auth_clean/core/presentation/service/snackbar_service.dart';
+import 'package:flutter_auth_clean/features/authorization/data/repository/auth_repository_impl.dart';
 import 'package:flutter_auth_clean/features/notes/domain/bloc/notes_bloc.dart';
 import 'package:flutter_auth_clean/locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
                 NotesBloc(notesRepository: locator<NotesRepositoryImpl>())),
       ],
       child: MaterialApp.router(
+        scaffoldMessengerKey: SnackBarService.scaffoldKey,
         title: 'Flutter Auth',
         debugShowCheckedModeBanner: false,
         routerDelegate: appRouter.delegate(),
