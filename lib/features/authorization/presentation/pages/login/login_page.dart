@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_clean/core/presentation/routes/app_router.gr.dart';
 import 'package:flutter_auth_clean/features/authorization/domain/bloc/auth_bloc.dart';
 import 'package:flutter_auth_clean/features/authorization/presentation/utils/login_page_controller.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
           body: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               if (state is Authenticated) {
-                AutoRouter.of(context).replaceNamed('/home-page');
+                AutoRouter.of(context).replace(HomeRoute());
               }
               return Padding(
                 padding: const EdgeInsets.all(30),

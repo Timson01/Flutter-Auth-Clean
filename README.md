@@ -1,4 +1,2 @@
-# flutter_auth_clean
-
-## Не успел сделать вывод пользователей 
+# flutter_auth_clean 
 

@@ -11,3 +11,5 @@ class NotesLoaded extends NotesState {
 
   NotesLoaded({required this.notes});
 }
+
+class NotesLoadingError extends NotesState {}

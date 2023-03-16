@@ -12,9 +12,20 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
 
   NotesBloc({required this.notesRepository}) : super(NotesInitial()) {
     on<GetNoteEvent>(getNote);
+    on<ClearNotes>(clearNotes);
   }
 
   Future<void> getNote(GetNoteEvent event, Emitter<NotesState> emit) async {
-    await notesRepository.getNotes();
+    emit(NotesLoading());
+    List<Note> notesList = await notesRepository.getNotes();
+    if (notesList.isNotEmpty) {
+      emit(NotesLoaded(notes: notesList));
+    } else {
+      emit(NotesLoadingError());
+    }
+  }
+
+  Future<void> clearNotes(ClearNotes event, Emitter<NotesState> emit) async {
+    emit(NotesLoaded(notes: []));
   }
 }
